@@ -1,7 +1,7 @@
 # Business Transaction Analytics — End-to-End Data Portfolio Project
 
 **Gabriel Caña** · Data Analyst & AI-Powered Dashboard Developer
-[LinkedIn](https://linkedin.com/in/gabrielcana) · [Live Dashboard](https://hashtro9-rgb.github.io/Business.github.io/dashboard/)
+[LinkedIn](https://linkedin.com/in/gabrielcana) · [Live Dashboard](https://hashtro9-rgb.github.io/BusinessAnalysis.github.io/dashboard/)
 
 ---
 
@@ -152,7 +152,7 @@ Business.github.io/
 ## How to View
 
 **Live Dashboard:**
-[https://hashtro9-rgb.github.io/Business.github.io/dashboard/](https://hashtro9-rgb.github.io/Business.github.io/dashboard/)
+[https://hashtro9-rgb.github.io/BusinessAnalysis.github.io/dashboard/](https://hashtro9-rgb.github.io/BusinessAnalysis.github.io/dashboard/)
 
 **Run the cleaning pipeline locally:**
 ```bash
