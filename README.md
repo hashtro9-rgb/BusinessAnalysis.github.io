@@ -154,6 +154,18 @@ Business.github.io/
 **Live Dashboard:**
 [https://hashtro9-rgb.github.io/BusinessAnalysis.github.io/dashboard/](https://hashtro9-rgb.github.io/BusinessAnalysis.github.io/dashboard/)
 
+---
+
+## 📂 Repository Structure
+
+You can explore the backend data pipeline, documentation, and frontend files directly through the clickable directory below:
+
+* 📂 **[data/](./data)** — Contains both the raw (`BUSINESS_DATASET_DIRTY.csv`) and the fully transformed (`BUSINESS_DATASET_FINAL_CLEAN.csv`) data files.
+* 📂 **[scripts/](./scripts)** — Contains the standalone data engineering files: the production staging pipeline (`data_cleaning_pipeline.sql`) and the automated processing script (`data_processing.py`).
+* 📂 **[docs/](./docs)** — Contains deep-dive documentation including data quality logs and detailed exploratory data analysis (EDA) summaries.
+* 📂 **[dashboard/](./dashboard)** — Contains the web presentation layer assets (`index.html`, `styles.css`, and `app.js`).
+
+---
 **Run the cleaning pipeline locally:**
 ```bash
 git clone https://github.com/hashtro9-rgb/Business.github.io
