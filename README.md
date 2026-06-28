@@ -1,6 +1,6 @@
 # Business Transaction Analytics — End-to-End Data Portfolio Project
 
-**Gabriel Caña** · Freelance Data Analyst & AI-Powered Dashboard Developer
+**Gabriel Caña** · Data Analyst & AI-Powered Dashboard Developer
 [LinkedIn](https://linkedin.com/in/gabrielcana) · [Live Dashboard](https://hashtro9-rgb.github.io/Business.github.io/dashboard/)
 
 ---
