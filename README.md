@@ -158,12 +158,12 @@ Business.github.io/
 
 ## 📂 Repository Structure
 
-You can explore the backend data pipeline, documentation, and frontend files directly through the clickable directory below:
+You can explore the backend data pipeline, documentation, and frontend code directly through the directory links below:
 
-* 📂 **[data/](./data)** — Contains both the raw (`BUSINESS_DATASET_DIRTY.csv`) and the fully transformed (`BUSINESS_DATASET_FINAL_CLEAN.csv`) data files.
-* 📂 **[scripts/](./scripts)** — Contains the standalone data engineering files: the production staging pipeline (`data_cleaning_pipeline.sql`) and the automated processing script (`data_processing.py`).
-* 📂 **[docs/](./docs)** — Contains deep-dive documentation including data quality logs and detailed exploratory data analysis (EDA) summaries.
-* 📂 **[dashboard/](./dashboard)** — Contains the web presentation layer assets (`index.html`, `styles.css`, and `app.js`).
+* 📂 **[data/](https://github.com/hashtro9-rgb/BusinessAnalysis.github.io/tree/main/data)** — Contains both the raw (`BUSINESS_DATASET_DIRTY.csv`) and the fully transformed (`BUSINESS_DATASET_FINAL_CLEAN.csv`) data files.
+* 📂 **[scripts/](https://github.com/hashtro9-rgb/BusinessAnalysis.github.io/tree/main/scripts)** — Contains the standalone data engineering files: the production staging pipeline (`data_cleaning_pipeline.sql`) and the automated processing script (`data_processing.py`).
+* 📂 **[docs/](https://github.com/hashtro9-rgb/BusinessAnalysis.github.io/tree/main/docs)** — Contains deep-dive documentation including data quality logs and detailed exploratory data analysis (EDA) summaries.
+* 💻 **[Live Interactive Dashboard](./dashboard/)** — Opens the fully interactive web presentation layer built with Chart.js.
 
 ---
 **Run the cleaning pipeline locally:**
