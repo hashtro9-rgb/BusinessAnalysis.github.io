@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Transaction Analytics | Gabriel Caña</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div class="logo">BTA</div>
+    <div>
+      <div class="header-title">Business Transaction Analytics</div>
+      <div class="header-sub">4,647 transactions &nbsp;·&nbsp; 10 countries &nbsp;·&nbsp; 2020–2025</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="pill pill-green">Verified Clean</span>
+    <span class="pill pill-blue">4,647 Records</span>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <span class="filter-label">Filter by year</span>
+  <button class="f-btn active" onclick="setYear('ALL',this)">All Years</button>
+  <button class="f-btn" onclick="setYear(2020,this)">2020</button>
+  <button class="f-btn" onclick="setYear(2021,this)">2021</button>
+  <button class="f-btn" onclick="setYear(2022,this)">2022</button>
+  <button class="f-btn" onclick="setYear(2023,this)">2023</button>
+  <button class="f-btn" onclick="setYear(2024,this)">2024</button>
+  <button class="f-btn" onclick="setYear(2025,this)">2025</button>
+</div>
+
+<div class="main">
+
+  <!-- KPIs -->
+  <div class="kpis">
+    <div class="kpi"><div class="kpi-label">Total Revenue</div><div class="kpi-value" id="k-rev">$7.11B</div><div class="kpi-delta">All 4,647 transactions</div></div>
+    <div class="kpi"><div class="kpi-label">Net Profit</div><div class="kpi-value" id="k-profit">$2.10B</div><div class="kpi-delta kpi-up" id="k-profit-d">29.5% net margin</div></div>
+    <div class="kpi"><div class="kpi-label">Gross Margin</div><div class="kpi-value" id="k-gm">47.1%</div><div class="kpi-delta">After COGS</div></div>
+    <div class="kpi"><div class="kpi-label">Transactions</div><div class="kpi-value" id="k-trans">4,647</div><div class="kpi-delta" id="k-trans-d">5.5 year period</div></div>
+    <div class="kpi"><div class="kpi-label">Avg Transaction</div><div class="kpi-value" id="k-avg">$1.53M</div><div class="kpi-delta">Per deal</div></div>
+    <div class="kpi"><div class="kpi-label">Repeat Customers</div><div class="kpi-value" id="k-repeat">51.0%</div><div class="kpi-delta kpi-up">2,372 of 4,647</div></div>
+    <div class="kpi"><div class="kpi-label">Top Market</div><div class="kpi-value" id="k-top">UK</div><div class="kpi-delta">$797M revenue</div></div>
+  </div>
+
+  <!-- ROW 1: Revenue Trend + Region Donut -->
+  <div class="row2">
+    <div class="card">
+      <div class="card-head"><div class="card-title">Annual Revenue Trend</div><div class="card-sub" id="trend-sub">Revenue and transaction count by year</div></div>
+      <div class="chart-h220"><canvas id="trendChart"></canvas></div>
+      <button class="insight-btn" onclick="toggleInsight('ins1',this)">Insight <span class="insight-arrow">▼</span></button>
+      <div class="insight-box" id="ins1"><b>Annual Revenue Analysis</b><ul><li><b>2022 was the peak year</b> at $1.35B — the strongest performance in the dataset.</li><li>Revenue has declined modestly post-2022, which may reflect market saturation or increased competitive pressure rather than structural business issues.</li><li><b>2025 is partial data (Jan–Jun only)</b> — annualized, it projects to approximately $1.71B which would signal recovery.</li><li>Transaction volume has remained stable at 774–847 per year, suggesting revenue per deal is the key variable to monitor closely.</li></ul></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div class="card-title">Revenue by Region</div><div class="card-sub">Geographic revenue distribution</div></div>
+      <div class="legend">
+        <span class="leg"><span class="leg-dot" style="background:#1c4ed8"></span>Europe</span>
+        <span class="leg"><span class="leg-dot" style="background:#0891b2"></span>Asia Pacific</span>
+        <span class="leg"><span class="leg-dot" style="background:#7c3aed"></span>Latin America</span>
+        <span class="leg"><span class="leg-dot" style="background:#15803d"></span>North America</span>
+        <span class="leg"><span class="leg-dot" style="background:#b45309"></span>Africa</span>
+        <span class="leg"><span class="leg-dot" style="background:#b91c1c"></span>Middle East</span>
+      </div>
+      <div class="chart-h180 donut-wrap">
+        <canvas id="regionChart"></canvas>
+        <div class="donut-center"><div class="donut-center-val">$7.11B</div><div class="donut-center-lbl">Total</div></div>
+      </div>
+      <button class="insight-btn" onclick="toggleInsight('ins2',this)">Insight <span class="insight-arrow">▼</span></button>
+      <div class="insight-box" id="ins2"><b>Regional Distribution Analysis</b><ul><li><b>Excellent geographic diversification</b> — no single region exceeds 18% of revenue, significantly reducing business concentration risk.</li><li><b>Europe leads</b> at $1.28B (18.0%), followed by Asia Pacific at $1.25B (17.6%). The gap between top and bottom is only 3.2 percentage points.</li><li><b>Middle East is the lowest region</b> ($1.05B) — a potential growth opportunity given the region's strong B2B procurement environment.</li></ul></div>
+    </div>
+  </div>
+
+  <!-- ROW 2: Countries + Products + Channels -->
+  <div class="row3">
+    <div class="card">
+      <div class="card-head"><div class="card-title">Top Countries by Revenue</div><div class="card-sub">Ranked by total revenue generated</div></div>
+      <div id="countryBars"></div>
+      <button class="insight-btn" onclick="toggleInsight('ins3',this)" style="margin-top:12px;">Insight <span class="insight-arrow">▼</span></button>
+      <div class="insight-box" id="ins3"><b>Country Performance Analysis</b><ul><li><b>United Kingdom leads</b> at $797M (11.2% of total) — likely benefiting from strong enterprise B2B relationships and favorable deal sizes.</li><li><b>Philippines ranks 3rd</b> at $743M — strong indicator of robust local and regional market penetration.</li><li>The top 5 countries contribute 49.5% of total revenue — concentrated but not dangerously so.</li><li>Revenue is well-balanced — the spread between 1st and 10th is only $158M across 10 countries.</li></ul></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div class="card-title">Product Revenue Ranking</div><div class="card-sub">Revenue contribution per product line</div></div>
+      <div id="productBars"></div>
+      <button class="insight-btn" onclick="toggleInsight('ins4',this)" style="margin-top:12px;">Insight <span class="insight-arrow">▼</span></button>
+      <div class="insight-box" id="ins4"><b>Product Portfolio Analysis</b><ul><li><b>Cloud Subscription leads</b> at $799M — its recurring revenue model provides more predictable income than one-time product sales.</li><li><b>Hardware ranks 2nd</b> ($785M), suggesting healthy hardware demand alongside software services — possibly a bundled sales model.</li><li>The <b>spread between #1 and #10 is only $163M</b> — an unusually balanced portfolio indicating strong cross-selling across customer segments.</li><li><b>Support Contract + Maintenance Plan = $1.45B</b> together, signaling strong after-sales relationships and high customer stickiness.</li></ul></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div class="card-title">Revenue by Sales Channel</div><div class="card-sub">Channel performance comparison</div></div>
+      <div class="chart-h200"><canvas id="channelChart"></canvas></div>
+      <button class="insight-btn" onclick="toggleInsight('ins5',this)">Insight <span class="insight-arrow">▼</span></button>
+      <div class="insight-box" id="ins5"><b>Channel Strategy Analysis</b><ul><li><b>Cold Outreach is the top channel</b> ($1.05B, 14.8%) — a strong outbound sales motion driving the most revenue.</li><li><b>Online and Trade Show</b> follow closely — the business is well-diversified across digital and in-person channels.</li><li><b>Partner channel ($964M) underperforms</b> relative to its potential — typically the highest-ROI channel in B2B; worth investing in partner enablement programs.</li><li>The channel balance reduces dependency on any single acquisition method — a sign of mature sales operations.</li></ul></div>
+    </div>
+  </div>
+
+  <!-- ROW 3: Reps + Industry -->
+  <div class="row2b">
+    <div class="card">
+      <div class="card-head"><div class="card-title">Sales Rep Leaderboard</div><div class="card-sub">Revenue generated per representative</div></div>
+      <div id="repBars"></div>
+      <button class="insight-btn" onclick="toggleInsight('ins6',this)" style="margin-top:12px;">Insight <span class="insight-arrow">▼</span></button>
+      <div class="insight-box" id="ins6"><b>Sales Team Performance Analysis</b><ul><li><b>Chen Wei leads</b> the team at $789M (11.1% of all revenue) — a clear top performer worth retaining and studying for best practices.</li><li><b>Emma Clarke ($616M) is the lowest</b> among named reps — a 28% gap from the top that warrants coaching rather than concern given team-wide balance.</li><li><b>The team is remarkably balanced</b> — 8 of 10 reps fall within a $145M revenue range, indicating consistent performance management.</li><li><b>109 transactions remain unassigned</b> — representing $189M in unattributed revenue that should be closed.</li></ul></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div class="card-title">Revenue by Industry</div><div class="card-sub">Market vertical performance</div></div>
+      <div class="chart-h220"><canvas id="industryChart"></canvas></div>
+      <button class="insight-btn" onclick="toggleInsight('ins7',this)">Insight <span class="insight-arrow">▼</span></button>
+      <div class="insight-box" id="ins7"><b>Industry Vertical Analysis</b><ul><li><b>Healthcare leads</b> at $796M — reflecting increased investment in health tech and digital health post-2020.</li><li><b>FMCG ranks 2nd</b> at $762M — fast-moving consumer goods companies are investing heavily in analytics and supply chain technology.</li><li><b>Technology ranks last</b> at $636M — potentially because these industries have stronger in-house capabilities, making external vendor selection more competitive.</li><li>The 10-industry spread is well-diversified, providing resilience against sector-specific downturns.</li></ul></div>
+    </div>
+  </div>
+
+  <!-- ROW 4: Status + Satisfaction + Segment -->
+  <div class="row3">
+    <div class="card">
+      <div class="card-head"><div class="card-title">Transaction Status</div><div class="card-sub">Breakdown of 4,647 transactions</div></div>
+      <div class="chart-h180"><canvas id="statusChart"></canvas></div>
+      <button class="insight-btn" onclick="toggleInsight('ins8',this)">Insight <span class="insight-arrow">▼</span></button>
+      <div class="insight-box" id="ins8"><b>Transaction Status Analysis</b><ul><li><b>Only 20.9% of transactions are Completed</b> — unusually low, suggesting either a long sales cycle or significant fulfillment delays.</li><li><b>Cancelled (18.9%) + Refunded (20.7%) = 39.6%</b> — a critical finding that requires a dedicated investigation into root causes.</li><li><b>20.2% still Processing</b> — active pipeline but potential bottlenecks in the conversion process.</li><li>Recommendation: Identify whether Cancelled and Refunded transactions share patterns by product, region, or rep to develop targeted retention strategies.</li></ul></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div class="card-title">Customer Satisfaction</div><div class="card-sub">Survey responses across all transactions</div></div>
+      <div class="chart-h180"><canvas id="satChart"></canvas></div>
+      <button class="insight-btn" onclick="toggleInsight('ins9',this)">Insight <span class="insight-arrow">▼</span></button>
+      <div class="insight-box" id="ins9"><b>Customer Satisfaction Analysis</b><ul><li><b>39.2% are Dissatisfied or Very Dissatisfied</b> — a significant concern when combined with the high cancellation and refund rates observed in transaction status.</li><li><b>38.8% are Satisfied or Very Satisfied</b> — creating a near-perfect split that makes the Net Promoter Score close to neutral.</li><li>Satisfaction is evenly distributed — possibly indicating a rating calibration issue or genuinely polarized customer experiences.</li><li>Recommendation: Investigate whether dissatisfied customers correlate with specific products, regions, or sales reps to identify improvement areas.</li></ul></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div class="card-title">Revenue by Customer Segment</div><div class="card-sub">Enterprise, SMB, Mid-Market, Startup, Government</div></div>
+      <div class="chart-h180"><canvas id="segChart"></canvas></div>
+      <button class="insight-btn" onclick="toggleInsight('ins10',this)">Insight <span class="insight-arrow">▼</span></button>
+      <div class="insight-box" id="ins10"><b>Customer Segment Analysis</b><ul><li><b>Government leads</b> at $1.48B — the largest segment, driven by large-contract public sector procurement and longer deal cycles.</li><li><b>SMB is second</b> at $1.45B — high-volume smaller deals balancing the large-ticket Government segment effectively.</li><li><b>Enterprise is the lowest segment</b> at $1.38B — counterintuitive given enterprise deals typically command higher ASPs. May indicate limited penetration in large corporates.</li><li>The near-equal distribution ($96M spread) shows a deliberately diversified go-to-market strategy.</li></ul></div>
+    </div>
+  </div>
+
+  <!-- ROW 5: Monthly + Payment + Repeat -->
+  <div class="row3">
+    <div class="card">
+      <div class="card-head"><div class="card-title">Monthly Revenue — 2024</div><div class="card-sub">Revenue distribution across 12 months</div></div>
+      <div class="chart-h180"><canvas id="monthlyChart"></canvas></div>
+      <button class="insight-btn" onclick="toggleInsight('ins11',this)">Insight <span class="insight-arrow">▼</span></button>
+      <div class="insight-box" id="ins11"><b>Monthly Revenue 2024 Analysis</b><ul><li><b>February ($128M) and April ($116M) were peak months</b> — driven by Q1 budget cycles where clients finalize annual purchases early.</li><li><b>December ($75M) was the weakest month</b> — a common pattern in B2B where deals slow during year-end holiday periods.</li><li>Recommendation: Front-load sales efforts in Q1 to maximize the natural February buying cycle evident in this trend.</li></ul></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div class="card-title">Payment Method Distribution</div><div class="card-sub">How clients prefer to pay</div></div>
+      <div class="chart-h180"><canvas id="payChart"></canvas></div>
+      <button class="insight-btn" onclick="toggleInsight('ins12',this)">Insight <span class="insight-arrow">▼</span></button>
+      <div class="insight-box" id="ins12"><b>Payment Method Analysis</b><ul><li><b>Check leads</b> at 695 transactions (15.0%) — more common in government and older enterprise clients, presenting slower cash collection cycles.</li><li><b>Invoice NET 30 + NET 60 = 28.0%</b> of transactions — significant deferred payment exposure to factor into cash flow planning.</li><li>Recommendation: Incentivize Bank Transfer and Credit Card payments with early payment discounts to improve the cash conversion cycle.</li></ul></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div class="card-title">Repeat vs New Customers</div><div class="card-sub">Revenue from returning vs first-time clients</div></div>
+      <div class="chart-h180 donut-wrap">
+        <canvas id="repeatChart"></canvas>
+        <div class="donut-center"><div class="donut-center-val">51%</div><div class="donut-center-lbl">Repeat</div></div>
+      </div>
+      <button class="insight-btn" onclick="toggleInsight('ins13',this)">Insight <span class="insight-arrow">▼</span></button>
+      <div class="insight-box" id="ins13"><b>Customer Retention Analysis</b><ul><li><b>51% repeat customer rate</b> — a healthy retention signal indicating strong product satisfaction and customer relationships over 5 years.</li><li>Repeat customers generated <b>$3.60B vs $3.51B for new customers</b> — the near-equal split means the business is not over-dependent on either acquisition or retention.</li><li>B2B industry benchmark for repeat rate is 70–80%, suggesting significant improvement opportunity through structured customer success programs.</li></ul></div>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="row-full">
+    <div class="card">
+      <div class="card-head"><div class="card-title">Top 20 Transactions by Revenue</div><div class="card-sub">Highest-value deals across the dataset — key accounts for retention and expansion</div></div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>Transaction ID</th><th>Order Date</th><th>Company</th><th>Product</th>
+            <th>Country</th><th>Sales Rep</th><th>Revenue</th><th>Net Profit</th>
+            <th>Status</th><th>Satisfaction</th>
+          </tr></thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+      <button class="insight-btn" onclick="toggleInsight('ins14',this)" style="margin-top:12px;">Insight <span class="insight-arrow">▼</span></button>
+      <div class="insight-box" id="ins14"><b>Top Transactions Analysis</b><ul><li>The top 20 transactions represent the highest-value deals in the dataset — key accounts worth protecting and expanding through dedicated account management.</li><li>High-revenue transactions with <b>Cancelled or Refunded status</b> represent significant revenue recovery opportunities — each warrants individual account review.</li><li>Cross-referencing top transactions with <b>Dissatisfied or Very Dissatisfied</b> satisfaction scores reveals at-risk accounts needing immediate intervention.</li><li>Use this table as a starting point for account prioritization in the next sales cycle review.</li></ul></div>
+    </div>
+  </div>
+
+  <div class="footer">Built with AI-powered data visualization &nbsp;·&nbsp; <b>Ging — Freelance Data Analyst</b></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
