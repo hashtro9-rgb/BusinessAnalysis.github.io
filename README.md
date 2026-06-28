@@ -149,12 +149,6 @@ Business.github.io/
 
 ---
 
-## How to View
-
-**Live Dashboard:**
-[https://hashtro9-rgb.github.io/BusinessAnalysis.github.io/dashboard/](https://hashtro9-rgb.github.io/BusinessAnalysis.github.io/dashboard/)
-
----
 
 ## 📂 Repository Structure
 
